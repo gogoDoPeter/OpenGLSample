@@ -7,8 +7,8 @@
 
 #include "android/log.h"
 
-#define LOGD(FORMAT, ...) __android_log_print(ANDROID_LOG_DEBUG, "my_tag", FORMAT, ##__VA_ARGS__);
-#define LOGE(FORMAT, ...) __android_log_print(ANDROID_LOG_ERROR, "my_tag", FORMAT, ##__VA_ARGS__);
+#define LOGD(FORMAT, ...) __android_log_print(ANDROID_LOG_DEBUG, "opengl_tag", FORMAT, ##__VA_ARGS__);
+#define LOGE(FORMAT, ...) __android_log_print(ANDROID_LOG_ERROR, "opengl_tag", FORMAT, ##__VA_ARGS__);
 
 
 #endif //OPENGLSAMPLE_ANDROIDLOG_H

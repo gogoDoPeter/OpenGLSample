@@ -11,11 +11,11 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private NativeOpenGl nativeOpenGl;
 
     public MySurfaceView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public MySurfaceView(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public MySurfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -33,15 +33,15 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
-        if(nativeOpenGl != null){
+        if (nativeOpenGl != null) {
             nativeOpenGl.surfaceCreate(surfaceHolder.getSurface());
         }
     }
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int format, int width, int height) {
-        if(nativeOpenGl!=null){
-            nativeOpenGl.surfaceChange(width,height);
+        if (nativeOpenGl != null) {
+            nativeOpenGl.surfaceChange(width, height);
         }
     }
 
