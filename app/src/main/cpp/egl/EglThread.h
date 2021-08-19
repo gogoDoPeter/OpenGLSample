@@ -8,7 +8,7 @@
 #include "pthread.h"
 #include <unistd.h>
 #include <EGL/eglplatform.h>
-#include "egl/EglHelper.h"
+#include "EglHelper.h"
 #include <GLES2/gl2.h>
 #include <sys/syscall.h>
 
@@ -57,6 +57,8 @@ public:
     void callbackOnDraw(CallbackOnDraw  onDraw, void *ctx);
 
     void notifyRender();
+
+    void destroy();
 };
 
 

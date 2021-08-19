@@ -20,7 +20,9 @@ void *eglThreadImp(void *context) {
     EglThread *eglThread = static_cast<EglThread *>(context);
     if (eglThread != nullptr) {
         EglHelper *pEglHelper = new EglHelper();
+
         pEglHelper->initEgl(eglThread->nativeWindow);
+
         eglThread->isExit = false;
         while (true) {
             //在这里拿到数据，可以渲染到NativeWindow上？ 不可以
@@ -64,6 +66,9 @@ void *eglThreadImp(void *context) {
                 pthread_mutex_unlock(&eglThread->pthread_mutex);
             }
             if (eglThread->isExit) {
+                pEglHelper->destoryEgl();
+                delete pEglHelper;
+                pEglHelper = NULL;
                 break;
             }
         }
@@ -115,5 +120,13 @@ void EglThread::notifyRender() {
     pthread_mutex_lock(&pthread_mutex);
     pthread_cond_signal(&pthread_cond);
     pthread_mutex_unlock(&pthread_mutex);
+}
+
+void EglThread::destroy() {
+    isExit = true;
+    notifyRender();
+    pthread_join(pid_egl, NULL);
+    nativeWindow = NULL;
+    pid_egl = -1;
 }
 
