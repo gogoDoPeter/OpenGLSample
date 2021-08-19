@@ -8,7 +8,7 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback {
-    private NativeOpenGl nativeOpenGl;
+    private NativeOpenGL nativeOpenGl;
 
     public MySurfaceView(Context context) {
         this(context, null);
@@ -27,14 +27,25 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 //        super(context, attrs, defStyleAttr, defStyleRes);
 //    }
 
-    public void setNativeOpenGl(NativeOpenGl nativeOpenGl) {
+    public void setNativeOpenGl(NativeOpenGL nativeOpenGl) {
         this.nativeOpenGl = nativeOpenGl;
+    }
+
+    private OnSurfaceListener onSurfaceListener;
+
+    public void setOnSurfaceListener(OnSurfaceListener onSurfaceListener) {
+        this.onSurfaceListener = onSurfaceListener;
     }
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
         if (nativeOpenGl != null) {
             nativeOpenGl.surfaceCreate(surfaceHolder.getSurface());
+
+            if(onSurfaceListener != null)
+            {
+                onSurfaceListener.init();
+            }
         }
     }
 
@@ -47,6 +58,13 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
+        if (nativeOpenGl != null) {
+            nativeOpenGl.surfaceDestroy();
+        }
+    }
 
+    public interface OnSurfaceListener
+    {
+        void init();
     }
 }

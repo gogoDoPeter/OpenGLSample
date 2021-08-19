@@ -17,7 +17,10 @@ add_library( # Sets the name of the library.
 
         native-lib.cpp
         egl/EglHelper.cpp
-        EglThread.cpp
+        egl/EglThread.cpp
+        opengl/BaseOpenGL.cpp
+        opengl/FilterOne.cpp
+        opengl/MyOpenGL.cpp
         )
 
 target_link_libraries( # Specifies the target library.
